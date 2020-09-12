@@ -5,16 +5,18 @@
             <input type="text" class="new-todo" placeholder="Ajouter une tâche" v-model="newTodo" @keyup.enter="addTodo" >
         </header>
         <div class="main">
-            <input type="checkbox" class="toggle-all" v-model="allDone">
-            <label for="toggle-all"></label>
-            <ul class="todo-list">
-                <li class="todo " v-for="todo in filteredTodos" v-bind:key="todo.name"  :class="{completed : todo.completed, editing: todo === editing}">
+            
+            <input id="toggle-all" type="checkbox" class="toggle-all" v-model="allDone" >
+            <label for="toggle-all" ></label>
+
+            <ul class="todo-list" >
+                <li class="todo " v-for="todo in filteredTodos" v-bind:key="todo.name"  :class="{completed : todo.completed, editing: todo === editing}" >
                     <div class="view">
-                        <input for="i" type="checkbox" v-model="todo.completed" class="toggle" >
+                        <input  type="checkbox" v-model="todo.completed" class="toggle" >
                         <label  @dblclick="editTodo(todo)" >{{ todo.name }}</label>
                         <button class="destroy" @click.prevent="deleteTodo(todo)"></button>
                     </div>
-                    <input type="text" name="i" class="edit"  v-model="name"  @keyup.enter="doneEdit(todo)">
+                    <input type="text" class="edit"  v-model="name"  @keyup.enter="doneEdit(todo)" @blur="doneEdit" v-focus="todo===editing" @keyup.esc="cancelEdit(todo)" >
                 </li>
             </ul>
         </div>
@@ -39,14 +41,12 @@ export default {
     data () {
         
         return {
-            todos: [{
-                name: 'tache de test', 
-                completed: false,
-            }],
+            todos: [],
             newTodo: '',
             filter: 'all',
             editing: null,
-            name:''
+            name:'',
+           
         }
     },
 
@@ -71,14 +71,33 @@ export default {
           /**   this.name = todo.*/
           this.name = todo.name
             this.editing = todo
+            this.oldTodo=todo.name
         },
         doneEdit(todo){
             todo.name= this.name
             this.editing= null
+        },
+
+        cancelEdit(todo){
+            this.name= todo.name
+            this.editing = null
+            
         }
     },
 
     computed: {
+         allDone:{
+             
+            get () {
+                return this.remaining === 0
+            },
+
+            set (value) {
+                this.todos.forEach(todo => {
+                    todo.completed = value
+                })
+            }
+        },
         remaining(){
             return this.todos.filter(todo => !todo.completed).length
         },
@@ -102,34 +121,18 @@ export default {
             return this.todos
         },
 
-        allDone:{
-
-            get () {
-                return this.remaining === 0
-            },
-
-            set (value) {
-                console.log('value', value)
-                this.todos.forEach(todo => {
-                    todo.completed = value
-                })
-            }
-        }
+       
     },
 
       directives: {
         
 
            focus(el, value) {
-                        console.log(el)
 
                 if(value){
-                        console.log(el)
                  let i =el;
                     Vue.nextTick(function(i){
-                        console.log(i)
-
-                        console.log(value)
+                        el.focus()
                     })
                 }
             }
