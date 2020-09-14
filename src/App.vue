@@ -2,7 +2,7 @@
   <div>
 
    <carousel>
-      <carousel-slide v-for="n in slides" v-bind:key="n" >
+      <carousel-slide v-for="n in slides" v-bind:key="n" :index="n - 1">
         <img :src="'https://picsum.photos/id/101' + n + '/630/300/'" alt="" width="100%">
       </carousel-slide>
       <!-- <carousel-slide>
@@ -12,6 +12,8 @@
     </carousel>
 
     <button @click="addSlide">Ajouter un slide</button>
+    <button @click="removeSlide">Supprimer un slide</button>
+
       <todos></todos>
     
   </div>
@@ -34,7 +36,13 @@ export default {
   methods:{
     addSlide(){
       this.slides++
-    }
+      console.log(this.slides)
+    },
+
+  removeSlide(){
+    this.slides--
+  }
+
   },
 
   components:{
