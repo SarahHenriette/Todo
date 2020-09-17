@@ -2,6 +2,7 @@
   <transition :name="transition">
         <div v-show="visible" >
         <slot></slot>
+        
     </div>
   </transition>
 </template>

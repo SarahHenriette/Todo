@@ -1,7 +1,15 @@
 <template>
   <div>
 
-   <carousel>
+
+  <div id="todoList" style="width: 70%; margin:auto">
+    <todos></todos>
+  </div>
+  
+
+
+  <div id="carousel">
+     <carousel>
       <carousel-slide v-for="n in slides" v-bind:key="n" :index="n - 1">
         <img :src="'https://picsum.photos/id/101' + n + '/630/300/'" alt="" width="100%">
       </carousel-slide>
@@ -13,9 +21,12 @@
 
     <button @click="addSlide">Ajouter un slide</button>
     <button @click="removeSlide">Supprimer un slide</button>
+  </div>
 
-      <todos></todos>
-    
+      
+    <button>TP: Todo-list</button>
+    <button>TP: Carousel</button>
+
   </div>
 </template>
  
@@ -55,3 +66,13 @@ export default {
 
 </script>
 
+<style>
+
+#carousel{
+    display: block;
+  position: relative;
+    width: 70%; 
+  margin:auto;
+}
+
+</style>
