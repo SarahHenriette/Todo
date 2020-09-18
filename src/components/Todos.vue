@@ -1,7 +1,7 @@
 <template>
     <section class="todoapp">
         <header class="header">
-            <h1>To do</h1>
+            <h1>TodoList</h1>
             <input type="text" class="new-todo" placeholder="Ajouter une tâche" v-model="newTodo" @keyup.enter="addTodo" >
         </header>
         <div class="main">

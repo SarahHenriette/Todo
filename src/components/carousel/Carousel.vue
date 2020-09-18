@@ -1,5 +1,7 @@
 <template>
-    <div style="position: relative;" >
+    <div style="position: relative;width: 100%;overflow: hidden;" >
+            
+
         <slot></slot>
         <button class="carousel__nav carousel__next" @click.prevent="next"><i class="fas fa-arrow-circle-right fa-3x"></i></button>
         <button class="carousel__nav carousel__prev" @click.prevent="prev"><i class="fas fa-arrow-circle-left fa-3x"></i></button>

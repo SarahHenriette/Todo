@@ -1,4 +1,5 @@
 <template>
+
   <transition :name="transition">
         <div v-show="visible" >
         <slot></slot>
