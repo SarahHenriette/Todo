@@ -20,8 +20,10 @@
 
     </carousel>
 
-    <button @click="addSlide">Ajouter un slide</button>
-    <button @click="removeSlide">Supprimer un slide</button>
+    <div id="btn-carousel">
+          <button @click="addSlide"><i class="fas fa-plus-circle fa-2x"></i></button>
+        <button @click="removeSlide"><i class="fas fa-trash-alt fa-2x"></i></button>
+    </div>
   </div>
 
       
@@ -111,8 +113,21 @@ export default {
     text-rendering: optimizeLegibility;
 }
 
+#btn-carousel {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+#btn-carousel button{
+  padding: 10px 20px; 
+  margin-left: 10px;
+  background-color: #d6d6d6;
+  
+}
+
 #todoList, #carousel{
-  background-color: red;
   height: 600px;
  
 
@@ -128,10 +143,12 @@ export default {
 }
 
 #btn button {
-  background-color: #272525;
+  background-color: #ab3232;
   color: #fff;
-  padding: 7px 15px;
+  padding: 15px 15px;
   cursor: pointer;
+  margin-top: 5px;
+
 }
 
 </style>
