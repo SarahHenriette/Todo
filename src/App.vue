@@ -26,19 +26,31 @@
     </div>
   </div>
 
+   <div id="form" v-if="formulaire">
+    <test-form></test-form>
+  </div>
       
     <div id="btn">
       <button @click="afficheTodoList">TP: Todo-list</button>
     <button @click="afficheCarousel">TP: Carousel</button>
+    <button @click="afficheFormulaire">Test : Formulaire</button>
+
     </div>
 
+
+ 
   </div>
+
+
+  
 </template>
  
 
 <script>
 
 import Todos from './components/Todos'
+import TestForm from './components/Form'
+
 import Carousel from './components/carousel/Carousel'
 import CarouselSlide from './components/carousel/CarouselSlide'
 
@@ -48,6 +60,7 @@ export default {
       slides: 5,
       carousel : false,
       todolist : true,
+      formulaire : false,
     }
   },
 
@@ -63,12 +76,22 @@ export default {
   
   afficheTodoList(){
     this.carousel = false
+    this.formulaire = false
+
       this.todolist = true
   },
 
 
    afficheCarousel(){
       this.carousel = true
+    this.formulaire = false
+
+      this.todolist = false
+  },
+     afficheFormulaire(){
+    this.formulaire = true
+
+      this.carousel = false
       this.todolist = false
   },
 
@@ -77,7 +100,8 @@ export default {
   components:{
     Todos, 
     Carousel,
-    CarouselSlide
+    CarouselSlide, 
+    TestForm
     
     },
 }
@@ -149,6 +173,11 @@ export default {
   cursor: pointer;
   margin-top: 5px;
 
+}
+
+#form{
+  margin: auto;
+  width: 50%;
 }
 
 </style>
