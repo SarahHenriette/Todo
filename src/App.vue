@@ -26,14 +26,20 @@
     </div>
   </div>
 
-   <div id="form" v-if="formulaire">
+   <div id="form" v-if="formulaire" >
     <test-form></test-form>
+  </div>
+
+     <div id="firebase" v-if="firebase" >
+    <test-firebase></test-firebase>
   </div>
       
     <div id="btn">
       <button @click="afficheTodoList">TP: Todo-list</button>
     <button @click="afficheCarousel">TP: Carousel</button>
     <button @click="afficheFormulaire">Test : Formulaire</button>
+    <button @click="afficheFirebase">Test : Firebase</button>
+
 
     </div>
 
@@ -50,6 +56,8 @@
 
 import Todos from './components/Todos'
 import TestForm from './components/Form'
+import TestFirebase from './components/Firebase'
+
 
 import Carousel from './components/carousel/Carousel'
 import CarouselSlide from './components/carousel/CarouselSlide'
@@ -61,6 +69,8 @@ export default {
       carousel : false,
       todolist : true,
       formulaire : false,
+      firebase : false,
+
     }
   },
 
@@ -77,6 +87,7 @@ export default {
   afficheTodoList(){
     this.carousel = false
     this.formulaire = false
+         this.firebase = false
 
       this.todolist = true
   },
@@ -85,11 +96,22 @@ export default {
    afficheCarousel(){
       this.carousel = true
     this.formulaire = false
+         this.firebase = false
 
       this.todolist = false
   },
      afficheFormulaire(){
     this.formulaire = true
+         this.firebase = false
+
+      this.carousel = false
+      this.todolist = false
+  },
+
+       afficheFirebase(){
+
+         this.firebase = true
+    this.formulaire = false
 
       this.carousel = false
       this.todolist = false
@@ -101,7 +123,8 @@ export default {
     Todos, 
     Carousel,
     CarouselSlide, 
-    TestForm
+    TestForm,
+    TestFirebase
     
     },
 }
