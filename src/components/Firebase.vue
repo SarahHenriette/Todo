@@ -3,10 +3,10 @@
     <h1>Firebase</h1>
 
    
-          <div v-if="t">
-             <div v-for="i in l" :key="i">
-                  <span>{{i}}</span>
-          <button v-on:click="removeUser()" >X</button>
+          <div v-if="t" id="e">
+             <div v-for="i in l" :key="i" class="i">
+                  <span >{{i}}</span>
+          <button v-on:click="removeUser(i)" >X</button>
              </div>
           </div><br>
     
@@ -16,12 +16,11 @@
         <input type="email" name="" id="" placeholder="Email" v-model="data.email">
         <button type="submit" @click="addSubmit">Add User</button>
     </form>
-    <ul class="errors">
-        <li v-show="!data.nom">Name cannot be empty.</li>
-        <li v-show="!data.email">
-          Please provide a valid email address.
-        </li>
-      </ul>
+        <ul class="errors">
+            <li v-show="!data.nom">Name cannot be empty.</li>
+            <li v-show="!data.email">Please provide a valid email address.</li>
+            <!-- <li v-if="data.test">ces donnees existes déjà</li> -->
+        </ul>
 </div>
 
     
@@ -36,22 +35,51 @@ export default {
             l:[],
             data:{
                 nom: "",
-                email: ""
+                email: "",
+                // test:false
             },
-            t : false
+            t : false,
+            close:true
           
         }
     },
        methods: {
            addSubmit(){
+              
                this.t = true
-               this.l.push(this.data.nom+ " " + this.data.email)
+               if(this.l.length === 0){
+                    this.l.push(this.data.nom+ " " + this.data.email)
+               }else{
+                    this.l.forEach(element => {
+                        if(element == this.data.nom+ " " + this.data.email){
+                               console.log('Ces données existe déjà')
+                        }else{
+                            this.l.push(this.data.nom+ " " + this.data.email)
+
+                        }
+                    });
+               }
+               this.data.nom=""
+               this.data.email=""
+               
          
             //    this.data.push(this.nom + " " + this.email)
             //    console.log(this.data)
            },
-           removeUser(){
-               this.t =false
+           removeUser(user){
+       
+            var id = document.getElementById('e')
+            var clas = id.getElementsByClassName('i')
+
+            for (let index = 0; index < clas.length; index++) {
+                if(clas[index].childNodes[0].innerText == user)
+                clas[index].remove()
+                
+            }
+         
+              
+
+               
            }
          
        }
